@@ -1,85 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESBLOX</title>
+    <title>RESBLOX &bull; Index page</title>
     <style>
         body {
             background-color: #FFFFFF;
             color: #000000;
             font-family: "Times New Roman", Times, serif;
-            font-size: 14px;
-            margin: 15px;
-            line-height: 1.4;
+            font-size: 13px;
+            margin: 20px;
+            line-height: 1.3;
         }
-        a { color: #0000EE; text-decoration: underline; cursor: pointer; }
+        a { color: #006699; text-decoration: underline; cursor: pointer; }
         a:visited { color: #551A8B; }
-        .logo-box {
-            width: 160px;
-            height: 60px;
-            border: 1px solid #999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            background: #f9f9f9;
-        }
-        h1 { font-size: 24px; margin: 5px 0; }
-        h2 { font-size: 18px; margin: 10px 0; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
-        .announcement { text-align: center; margin: 15px 0; }
+        h1 { font-size: 22px; font-weight: bold; margin: 0 0 5px 0; }
+        h3 { font-size: 15px; font-weight: bold; margin: 15px 0 5px 0; border-bottom: 1px solid #AAAAAA; padding-bottom: 2px; }
+        .logo-img { border: 1px solid #ccc; width: 140px; height: 50px; background: #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+        .announcement { text-align: center; margin: 10px 0; border: 1px dashed #666; padding: 8px; background: #fafafa; }
         .important { color: #CC0000; font-weight: bold; }
-        .meta-indent { margin-left: 25px; font-size: 13px; margin-bottom: 8px; }
-        .italic { font-style: italic; }
-        table.classic { border-collapse: collapse; width: 100%; max-width: 900px; margin: 10px 0; }
-        table.classic th, table.classic td { border: 1px solid #888; padding: 6px 8px; text-align: left; }
-        table.classic th { background-color: #EFEFEF; }
-        input[type="text"], input[type="password"], textarea, select {
-            font-family: "Times New Roman", Times, serif;
-            border: 1px solid #777;
-            padding: 4px;
-            max-width: 95%;
+        .msg { color: #CC0000; font-weight: bold; margin: 5px 0; }
+        
+        /* phpBB 2010 Table / Category Layout */
+        table.forum-table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            margin: 5px 0 15px 0;
+            border: 1px solid #C0C0C0;
         }
-        input[type="submit"], button {
-            font-family: "Times New Roman", Times, serif;
-            padding: 3px 8px;
-            cursor: pointer;
+        table.forum-table th {
             background-color: #EFEFEF;
-            border: 1px solid #777;
+            border: 1px solid #C0C0C0;
+            padding: 4px 6px;
+            font-size: 11px;
+            text-align: left;
         }
-        .msg { color: #CC0000; font-weight: bold; margin: 10px 0; }
-        fieldset { max-width: 600px; margin-bottom: 15px; border: 1px solid #888; background: #fafafa; }
-        ul.nav-menu { list-style-type: none; padding: 0; margin: 10px 0; }
-        ul.nav-menu li { display: inline; margin-right: 15px; }
-        .footer-note { font-size: 12px; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; }
+        table.forum-table td {
+            border: 1px solid #C0C0C0;
+            padding: 5px 8px;
+            vertical-align: middle;
+        }
+        .cat-title-row {
+            background-color: #D9D9D9;
+            font-weight: bold;
+            padding: 4px 6px;
+            border: 1px solid #C0C0C0;
+            margin-top: 10px;
+        }
+        
+        input, textarea, select {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 13px;
+            border: 1px solid #7f9db9;
+            padding: 2px;
+        }
+        input[type="submit"] { background-color: #EFEFEF; border: 1px solid #666; cursor: pointer; }
+        fieldset { border: 1px solid #C0C0C0; padding: 10px; max-width: 600px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-<div class="logo-box">RESBLOX</div>
+<div class="logo-img">RESBLOX</div>
 <h1>RESBLOX</h1>
-<p>The offsite ROBLOX game server platform.</p>
+<div style="font-style: italic;">The offsite ROBLOX game server platform.</div>
 
-<ul class="nav-menu" id="top-nav"></ul>
+<p style="margin: 8px 0;">
+    <a href="#" onclick="navigate('index'); return false;">Board index</a><br>
+    <a href="#" onclick="alert('Font size changer'); return false;">Change font size</a><br>
+    <a href="#" onclick="navigate('faq'); return false;">FAQ</a>
+</p>
 
-<h3>Announcements</h3>
+<h3>Site Announcements</h3>
 <div class="announcement">
-    <p>Download launcher <a onclick="alert('Launcher download link')">here</a>.</p>
+    <p>You can download RESL <a href="#" onclick="alert('RESL download link'); return false;">here</a>. The old information page can also be found <a href="#" onclick="navigate('faq'); return false;">here</a>.</p>
+    <p><span class="important">Important Information!</span><br>
+    If you haven't uninstalled RESL and reinstalled it from <a href="#" onclick="alert('release'); return false;">release</a>, then you need to do so now, as the old version will no longer be able to interface with the new website for updates.</p>
 </div>
 
 <div id="status-msg" class="msg"></div>
 
-<p id="last-visit"></p>
-<p id="current-time"></p>
+<p id="visit-info"></p>
+<p id="current-time-info"></p>
 
-<hr>
+<hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
 
-<div id="main-content"></div>
+<div id="main-container"></div>
 
-<hr>
+<hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
 
 <h3>Who is online</h3>
 <div id="who-is-online"></div>
@@ -87,76 +95,88 @@
 <h3>Statistics</h3>
 <div id="site-stats"></div>
 
-<ul class="nav-menu" style="margin-top: 15px;">
-    <li><a onclick="navigate('index')">Board index</a></li>
-    <li>All times are UTC</li>
-</ul>
+<p style="margin: 10px 0;">
+    <a href="#" onclick="navigate('index'); return false;">Board index</a><br>
+    All times are UTC
+</p>
 
-<div class="footer-note">
-    Powered by phpBB &bull; RESBLOX Platform
+<div style="font-size: 11px; color: #444; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 5px;">
+    Powered by phpBB &copy; 2000, 2002, 2005, 2007 phpBB Group<br>
+    RESBLOX is not affiliated with ROBLOX. ROBLOX Client program is &copy; 2010 ROBLOX Corporation.
 </div>
 
 <script>
-const DB_KEY = 'resblox_db_clean_v1';
+const DB_KEY = 'resblox_exact_2010_db';
 
-function formatDate(d = new Date()) {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let hours = d.getUTCHours();
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12 || 12;
-    const mins = String(d.getUTCMinutes()).padStart(2, '0');
-    return `${days[d.getUTCDay()]} ${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} ${hours}:${mins} ${ampm}`;
+function getExactDateStr() {
+    return "Sat Oct 30, 2010 2:20 am";
 }
 
 function getDefaultDB() {
     return {
         users: [
-            { id: 1, username: 'Admin', password: '123', role: 'Administrator' },
-            { id: 2, username: 'Player1', password: '123', role: 'Registered user' }
+            { id: 1, username: 'RESBLOX', password: '123', role: 'Administrator' },
+            { id: 2, username: 'Nazer1290', password: '123', role: 'Super Moderator' },
+            { id: 3, username: 'Anti', password: '123', role: 'Registered user' },
+            { id: 4, username: 'Patacorow', password: '123', role: 'Registered user' },
+            { id: 5, username: 'qaz32152', password: '123', role: 'Registered user' },
+            { id: 6, username: 'Dqbert', password: '123', role: 'Registered user' }
         ],
         categories: [
-            { id: 1, section: 'RESBLOX', title: 'News & Announcements', desc: 'Platform updates and news.', isServerList: false },
-            { id: 2, section: 'RESBLOX', title: 'General Discussion', desc: 'Talk about anything here.', isServerList: false },
-            { id: 3, section: 'RESBLOX', title: 'Games List (28)', desc: 'Active servers and games.', isServerList: true }
+            { id: 1, section: 'RESBLOX', title: 'Announcements & News', desc: 'Any important announcements and news will be posted here.', isServer: false },
+            { id: 2, section: 'RESBLOX', title: 'RESBLOX Talk', desc: 'Talk about anything to do with the RESBLOX platform.', isServer: false },
+            { id: 3, section: 'RESBLOX', title: 'Suggestions', desc: 'Got a suggestions for RESBLOX? Post it here.', isServer: false },
+            { id: 4, section: 'RESBLOX', title: 'Technical Help and Bug Reports', desc: 'Found a bug in the site or in RESL? Just need help on a technical side? Post here.', isServer: false },
+            { id: 5, section: 'RESBLOX', title: 'Server List', desc: 'View a list of all RESBLOX Servers currently online (28 Games).', isServer: true },
+            { id: 6, section: 'ROBLOX', title: 'ROBLOX Talk', desc: 'General discussion about anything ROBLOX related.', isServer: false },
+            { id: 7, section: 'Other', title: 'Off Topic', desc: 'Anything not relating to RESBLOX goes here.', isServer: false }
         ],
         topics: [
-            { id: 1, catId: 1, userId: 1, title: 'Welcome to RESBLOX', date: 'Mon Jan 1, 2026 12:00 pm' },
-            { id: 2, catId: 2, userId: 2, title: 'Hello everyone!', date: 'Mon Jan 1, 2026 12:05 pm' }
+            { id: 1, catId: 1, userId: 2, title: 'RESL Update & New Website', date: 'Tue Oct 26, 2010 8:28 pm' },
+            { id: 2, catId: 2, userId: 3, title: 'How is everyone enjoying RESBLOX?', date: 'Fri Oct 29, 2010 8:36 pm' },
+            { id: 3, catId: 3, userId: 4, title: 'Add custom hats support', date: 'Sat Sep 25, 2010 3:33 pm' },
+            { id: 4, catId: 4, userId: 1, title: 'Port forwarding guide for hosts', date: 'Fri Oct 29, 2010 2:52 pm' },
+            { id: 5, catId: 6, userId: 5, title: 'Favorite 2010 ROBLOX games?', date: 'Fri Aug 13, 2010 5:36 pm' },
+            { id: 6, catId: 7, userId: 2, title: 'Random chat thread', date: 'Wed Oct 20, 2010 10:57 pm' }
         ],
         posts: [
-            { id: 1, topicId: 1, userId: 1, content: 'Platform is online and ready.', date: 'Mon Jan 1, 2026 12:00 pm' },
-            { id: 2, topicId: 2, userId: 2, content: 'Glad to be here!', date: 'Mon Jan 1, 2026 12:05 pm' }
+            { id: 1, topicId: 1, userId: 2, content: 'Make sure to reinstall RESL from release!', date: 'Tue Oct 26, 2010 8:28 pm' },
+            { id: 2, topicId: 2, userId: 3, content: 'Servers are super smooth!', date: 'Fri Oct 29, 2010 8:36 pm' },
+            { id: 3, topicId: 3, userId: 4, content: 'Would be cool to have classic hats.', date: 'Sat Sep 25, 2010 3:33 pm' },
+            { id: 4, topicId: 4, userId: 1, content: 'Open port 53640.', date: 'Fri Oct 29, 2010 2:52 pm' },
+            { id: 5, topicId: 5, userId: 5, content: 'SFOTH IV is the best.', date: 'Fri Aug 13, 2010 5:36 pm' },
+            { id: 6, topicId: 6, userId: 2, content: 'Off topic chat here.', date: 'Wed Oct 20, 2010 10:57 pm' }
         ],
+        // Ακριβώς 28 παιχνίδια όπως ζήτησες
         servers: [
-            { id: 1, host: 'Admin', name: 'Crossroads Map', desc: 'Classic combat map', ip: '127.0.0.1', port: 53640 },
-            { id: 2, host: 'Player1', name: 'SFOTH IV', desc: 'Sword fighting', ip: '127.0.0.1', port: 53641 },
-            { id: 3, host: 'Host3', name: 'Doomspire', desc: 'Tower destruction', ip: '127.0.0.1', port: 53642 },
-            { id: 4, host: 'Host4', name: 'Town of Robloxia', desc: 'Roleplay town', ip: '127.0.0.1', port: 53643 },
-            { id: 5, host: 'Host5', name: 'Natural Disaster', desc: 'Survive events', ip: '127.0.0.1', port: 53644 },
-            { id: 6, host: 'Host6', name: 'Base Wars', desc: 'Tank battles', ip: '127.0.0.1', port: 53645 },
-            { id: 7, host: 'Host7', name: 'Pizza Place', desc: 'Work and cook', ip: '127.0.0.1', port: 53646 },
-            { id: 8, host: 'Host8', name: 'Crossroads v1', desc: 'Old version', ip: '127.0.0.1', port: 53647 },
-            { id: 9, host: 'Host9', name: 'Minigames', desc: 'Fast fun', ip: '127.0.0.1', port: 53648 },
-            { id: 10, host: 'Host10', name: 'Paintball Arena', desc: 'Paint guns', ip: '127.0.0.1', port: 53649 },
-            { id: 11, host: 'Host11', name: 'Teleport Test', desc: 'Testing map', ip: '127.0.0.1', port: 53650 },
-            { id: 12, host: 'Host12', name: 'Castle Defense', desc: 'Defend base', ip: '127.0.0.1', port: 53651 },
-            { id: 13, host: 'Host13', name: 'Vehicle Sim', desc: 'Driving cars', ip: '127.0.0.1', port: 53652 },
-            { id: 14, host: 'Host14', name: 'Mega Obby', desc: 'Obstacle course', ip: '127.0.0.1', port: 53653 },
-            { id: 15, host: 'Host15', name: 'Forest Hideout', desc: 'Hidden weapons', ip: '127.0.0.1', port: 53654 },
-            { id: 16, host: 'Host16', name: 'Rocket Arena', desc: 'Rockets only', ip: '127.0.0.1', port: 53655 },
-            { id: 17, host: 'Host17', name: 'Zombie Survival', desc: 'Fight zombies', ip: '127.0.0.1', port: 53656 },
-            { id: 18, host: 'Host18', name: 'Hide and Seek', desc: 'Find players', ip: '127.0.0.1', port: 53657 },
-            { id: 19, host: 'Host19', name: 'Derby Crash', desc: 'Car crashes', ip: '127.0.0.1', port: 53658 },
-            { id: 20, host: 'Host20', name: 'Bomb Survival', desc: 'Dodge bombs', ip: '127.0.0.1', port: 53659 },
-            { id: 21, host: 'Host21', name: 'City Roleplay', desc: 'Virtual life', ip: '127.0.0.1', port: 53660 },
-            { id: 22, host: 'Host22', name: 'Ninja Dojo', desc: 'Katana training', ip: '127.0.0.1', port: 53661 },
-            { id: 23, host: 'Host23', name: 'Pirate Battle', desc: 'Seas combat', ip: '127.0.0.1', port: 53662 },
-            { id: 24, host: 'Host24', name: 'Moon Base', desc: 'Space exploration', ip: '127.0.0.1', port: 53663 },
-            { id: 25, host: 'Host25', name: 'Sword Arena', desc: 'Fast duels', ip: '127.0.0.1', port: 53664 },
-            { id: 26, host: 'Host26', name: 'Speedway Racing', desc: 'High speed cars', ip: '127.0.0.1', port: 53665 },
-            { id: 27, host: 'Host27', name: 'Sandbox Build', desc: 'Build freely', ip: '127.0.0.1', port: 53666 },
-            { id: 28, host: 'Host28', name: 'Final Server', desc: 'Last slot game', ip: '127.0.0.1', port: 53667 }
+            { id: 1, host: 'RESBLOX', name: 'Crossroads [Classic 2010]', desc: 'The legendary original map!', ip: '127.0.0.1', port: 53640 },
+            { id: 2, host: 'Nazer1290', name: 'Sword Fight on the Heights IV', desc: 'Classic sword fighting.', ip: '127.0.0.1', port: 53641 },
+            { id: 3, host: 'Anti', name: 'Doomspire BrickBattle', desc: 'Destroy towers.', ip: '127.0.0.1', port: 53642 },
+            { id: 4, host: 'Patacorow', name: 'Town of Robloxia', desc: 'Roleplay and drive.', ip: '127.0.0.1', port: 53643 },
+            { id: 5, host: 'qaz32152', name: 'Natural Disaster Survival', desc: 'Survive events.', ip: '127.0.0.1', port: 53644 },
+            { id: 6, host: 'Dqbert', name: 'Base Wars FPS', desc: 'Tanks and guns.', ip: '127.0.0.1', port: 53645 },
+            { id: 7, host: 'RESBLOX', name: 'Work at a Pizza Place', desc: 'Cook pizzas.', ip: '127.0.0.1', port: 53646 },
+            { id: 8, host: 'Admin', name: 'Crossroads v1.0', desc: '2008 nostalgia.', ip: '127.0.0.1', port: 53647 },
+            { id: 9, host: 'BuilderMan', name: 'Roblox Minigames', desc: 'Fast fun obstacle courses.', ip: '127.0.0.1', port: 53648 },
+            { id: 10, host: 'NoobMaster', name: 'Classic Paintball!', desc: 'Paint guns.', ip: '127.0.0.1', port: 53649 },
+            { id: 11, host: 'RobloxFan', name: 'Teleporters Test Place', desc: 'Teleporting around.', ip: '127.0.0.1', port: 53650 },
+            { id: 12, host: 'Guest99', name: 'Castle Defense 2010', desc: 'Defend castle.', ip: '127.0.0.1', port: 53651 },
+            { id: 13, host: 'BloxUser', name: 'Vehicle Simulator Retro', desc: 'Drive blocky cars.', ip: '127.0.0.1', port: 53652 },
+            { id: 14, host: 'ScriptKing', name: 'Teleport Mega Obby', desc: '100 stages.', ip: '127.0.0.1', port: 53653 },
+            { id: 15, host: 'Shedletsky', name: 'Telamon Forest Hideout', desc: 'Hidden weapons.', ip: '127.0.0.1', port: 53654 },
+            { id: 16, host: 'Erik', name: 'Rocket Arena 2010', desc: 'Rockets only.', ip: '127.0.0.1', port: 53655 },
+            { id: 17, host: 'JohnDoe', name: 'Zombie Outbreak Survival', desc: 'Undead hordes.', ip: '127.0.0.1', port: 53656 },
+            { id: 18, host: 'JaneDoe', name: 'Hide and Seek Extreme', desc: 'Hiding spot.', ip: '127.0.0.1', port: 53657 },
+            { id: 19, host: 'BrickMaster', name: 'Destruction Derby', desc: 'Crash cars.', ip: '127.0.0.1', port: 53658 },
+            { id: 20, host: 'Speedy', name: 'Super Bomb Survival', desc: 'Dodge bombs.', ip: '127.0.0.1', port: 53659 },
+            { id: 21, host: 'MasterBuilder', name: 'Mega City Roleplay', desc: 'Virtual life.', ip: '127.0.0.1', port: 53660 },
+            { id: 22, host: 'NinjaRoblox', name: 'Ninja Training Dojo', desc: 'Katana skills.', ip: '127.0.0.1', port: 53661 },
+            { id: 23, host: 'PirateKing', name: 'Pirate Ship Battle', desc: 'Cannon fire.', ip: '127.0.0.1', port: 53662 },
+            { id: 24, host: 'SpaceExplorer', name: 'Moon Base Alpha 2010', desc: 'Space exploration.', ip: '127.0.0.1', port: 53663 },
+            { id: 25, host: 'RetroGamer', name: 'Classic Sword Arena', desc: 'Fast duels.', ip: '127.0.0.1', port: 53664 },
+            { id: 26, host: 'OldSchool', name: 'Classic Racing Speedway', desc: 'High speed.', ip: '127.0.0.1', port: 53665 },
+            { id: 27, host: 'TestHost', name: 'Sandbox Build & Chill', desc: 'Build freely.', ip: '127.0.0.1', port: 53666 },
+            { id: 28, host: 'FinalServer', name: 'The Last 2010 Server', desc: 'Last slot.', ip: '127.0.0.1', port: 53667 }
         ]
     };
 }
@@ -165,210 +185,149 @@ let db = JSON.parse(localStorage.getItem(DB_KEY)) || getDefaultDB();
 let currentUser = JSON.parse(sessionStorage.getItem('res_user')) || null;
 let currentView = { page: 'index', id: null };
 
-function saveDB() {
-    localStorage.setItem(DB_KEY, JSON.stringify(db));
-}
+function saveDB() { localStorage.setItem(DB_KEY, JSON.stringify(db)); }
+function escapeHTML(str) { return String(str).replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])); }
+function setMsg(txt) { document.getElementById('status-msg').textContent = txt; }
+function navigate(page, id = null) { setMsg(''); currentView = { page, id }; render(); window.scrollTo(0,0); }
 
-function escapeHTML(str) {
-    return String(str).replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-    }[tag]));
-}
-
-function setMsg(text) {
-    document.getElementById('status-msg').textContent = text;
-}
-
-function navigate(page, id = null) {
-    setMsg('');
-    currentView = { page, id };
-    render();
-    window.scrollTo(0, 0);
+function getRoleColor(role) {
+    if (role === 'Administrator') return '#AA0000';
+    if (role === 'Official ROBLOX Staff') return '#551A8B';
+    if (role === 'Super Moderator') return '#00AA00';
+    return '#000000';
 }
 
 function handleLogin(e) {
     e.preventDefault();
-    const u = document.getElementById('login-user').value.trim();
-    const p = document.getElementById('login-pass').value;
+    const u = document.getElementById('l-user').value.trim();
+    const p = document.getElementById('l-pass').value;
     const found = db.users.find(x => x.username.toLowerCase() === u.toLowerCase() && x.password === p);
-    if (found) {
-        currentUser = found;
-        sessionStorage.setItem('res_user', JSON.stringify(found));
-        navigate('index');
-    } else {
-        setMsg('Invalid login!');
-    }
+    if (found) { currentUser = found; sessionStorage.setItem('res_user', JSON.stringify(found)); navigate('index'); }
+    else { setMsg('Invalid credentials!'); }
 }
 
 function handleRegister(e) {
     e.preventDefault();
-    const u = document.getElementById('reg-user').value.trim();
-    const p = document.getElementById('reg-pass').value;
-    if (u.length < 3 || p.length < 3) {
-        setMsg('Min 3 characters required.');
-        return;
-    }
-    if (db.users.some(x => x.username.toLowerCase() === u.toLowerCase())) {
-        setMsg('User exists!');
-        return;
-    }
+    const u = document.getElementById('r-user').value.trim();
+    const p = document.getElementById('r-pass').value;
+    if (u.length < 3) { setMsg('Username too short'); return; }
+    if (db.users.some(x => x.username.toLowerCase() === u.toLowerCase())) { setMsg('User exists'); return; }
     const newUser = { id: Date.now(), username: u, password: p, role: 'Registered user' };
-    db.users.push(newUser);
-    saveDB();
-    currentUser = newUser;
-    sessionStorage.setItem('res_user', JSON.stringify(newUser));
-    navigate('index');
-}
-
-function logout() {
-    currentUser = null;
-    sessionStorage.removeItem('res_user');
-    navigate('index');
+    db.users.push(newUser); saveDB(); currentUser = newUser; sessionStorage.setItem('res_user', JSON.stringify(newUser)); navigate('index');
 }
 
 function handleNewTopic(e, catId) {
     e.preventDefault();
     if (!currentUser) return;
-    const title = document.getElementById('topic-title').value.trim();
-    const content = document.getElementById('topic-content').value.trim();
+    const title = document.getElementById('t-title').value.trim();
+    const content = document.getElementById('t-content').value.trim();
     if (!title || !content) return;
-    const now = formatDate();
     const tid = Date.now();
-    db.topics.unshift({ id: tid, catId: catId, userId: currentUser.id, title: title, date: now });
-    db.posts.push({ id: Date.now() + 1, topicId: tid, userId: currentUser.id, content: content, date: now });
-    saveDB();
-    navigate('topic', tid);
+    db.topics.unshift({ id: tid, catId: catId, userId: currentUser.id, title: title, date: getExactDateStr() });
+    db.posts.push({ id: Date.now()+1, topicId: tid, userId: currentUser.id, content: content, date: getExactDateStr() });
+    saveDB(); navigate('topic', tid);
 }
 
 function handleReply(e, topicId) {
     e.preventDefault();
     if (!currentUser) return;
-    const content = document.getElementById('reply-content').value.trim();
+    const content = document.getElementById('r-content').value.trim();
     if (!content) return;
-    db.posts.push({ id: Date.now(), topicId: topicId, userId: currentUser.id, content: content, date: formatDate() });
-    saveDB();
-    navigate('topic', topicId);
+    db.posts.push({ id: Date.now(), topicId: topicId, userId: currentUser.id, content: content, date: getExactDateStr() });
+    saveDB(); navigate('topic', topicId);
 }
 
 function handleAddServer(e) {
     e.preventDefault();
     if (!currentUser) return;
-    const name = document.getElementById('srv-name').value.trim();
-    const desc = document.getElementById('srv-desc').value.trim();
-    const ip = document.getElementById('srv-ip').value.trim();
-    const port = parseInt(document.getElementById('srv-port').value) || 53640;
+    const name = document.getElementById('s-name').value.trim();
+    const desc = document.getElementById('s-desc').value.trim();
+    const ip = document.getElementById('s-ip').value.trim();
+    const port = parseInt(document.getElementById('s-port').value) || 53640;
     if (!name || !ip) return;
     db.servers.unshift({ id: Date.now(), host: currentUser.username, name, desc, ip, port });
-    saveDB();
-    navigate('servers');
+    saveDB(); navigate('servers');
 }
 
 function render() {
-    const nowStr = formatDate();
-    document.getElementById('last-visit').textContent = 'Last visit: ' + nowStr;
-    document.getElementById('current-time').textContent = 'Current time: ' + nowStr;
+    const dateStr = getExactDateStr();
+    document.getElementById('visit-info').textContent = 'Last visit was: ' + dateStr;
+    document.getElementById('current-time-info').textContent = 'It is currently ' + dateStr;
 
-    const nav = document.getElementById('top-nav');
-    nav.innerHTML = `
-        <li><a onclick="navigate('index')"><strong>[ Board Index ]</strong></a></li>
-        <li><a onclick="navigate('servers')"><strong>[ Games (${db.servers.length}) ]</strong></a></li>
-        <li><a onclick="navigate('faq')"><strong>[ FAQ ]</strong></a></li>
-        ${currentUser
-            ? `<li>Logged in as <strong>${escapeHTML(currentUser.username)}</strong> [ <a onclick="logout()">Logout</a> ]</li>`
-            : `<li><a onclick="navigate('login')"><strong>[ Login / Register ]</strong></a></li>`
-        }
-    `;
-
-    const main = document.getElementById('main-content');
+    const container = document.getElementById('main-container');
 
     if (currentView.page === 'login') {
-        main.innerHTML = `
-            <h2>Login</h2>
+        container.innerHTML = `
+            <h2>Login / Register</h2>
+            ${currentUser ? `<p>Logged in as <b>${escapeHTML(currentUser.username)}</b> [<a href="#" onclick="currentUser=null; sessionStorage.removeItem('res_user'); render(); return false;">Logout</a>]</p>` : `
+            <fieldset><legend><b>Login</b></legend>
             <form onsubmit="handleLogin(event)">
-                User: <input type="text" id="login-user" required><br><br>
-                Pass: <input type="password" id="login-pass" required><br><br>
+                Username: <input type="text" id="l-user" required><br><br>
+                Password: <input type="password" id="l-pass" required><br><br>
                 <input type="submit" value="Login">
-            </form>
-            <hr>
-            <h2>Register</h2>
+            </form></fieldset>
+            <fieldset><legend><b>Register</b></legend>
             <form onsubmit="handleRegister(event)">
-                User: <input type="text" id="reg-user" required><br><br>
-                Pass: <input type="password" id="reg-pass" required><br><br>
+                Username: <input type="text" id="r-user" required><br><br>
+                Password: <input type="password" id="r-pass" required><br><br>
                 <input type="submit" value="Register">
-            </form>
+            </form></fieldset>`}
         `;
     } else if (currentView.page === 'faq') {
-        main.innerHTML = `
-            <h2>FAQ</h2>
-            <p>Use the Games button to view all servers and join.</p>
-        `;
+        container.innerHTML = `<h2>FAQ</h2><p>RESBLOX is an offsite platform. Check the Server List to join games.</p>`;
     } else if (currentView.page === 'servers') {
-        let formHtml = currentUser ? `
-            <fieldset>
-                <legend><strong>Host Game</strong></legend>
-                <form onsubmit="handleAddServer(event)">
-                    Name: <input type="text" id="srv-name" required><br><br>
-                    Desc: <input type="text" id="srv-desc"><br><br>
-                    IP: <input type="text" id="srv-ip" value="127.0.0.1" required>
-                    Port: <input type="text" id="srv-port" value="53640" size="6" required><br><br>
-                    <input type="submit" value="Add Server">
-                </form>
-            </fieldset>
-        ` : `<p><a onclick="navigate('login')">Login</a> to host.</p>`;
+        let hostBox = currentUser ? `
+            <fieldset><legend><b>Host a Server</b></legend>
+            <form onsubmit="handleAddServer(event)">
+                Name: <input type="text" id="s-name" required><br><br>
+                Desc: <input type="text" id="s-desc"><br><br>
+                IP: <input type="text" id="s-ip" value="127.0.0.1" required> Port: <input type="text" id="s-port" value="53640" size="5"><br><br>
+                <input type="submit" value="Publish">
+            </form></fieldset>
+        ` : `<p><a href="#" onclick="navigate('login'); return false;">Login</a> to host servers.</p>`;
 
-        let rows = db.servers.map((s, i) => `
+        let rows = db.servers.map(s => `
             <tr>
-                <td><strong>#${i + 1} - ${escapeHTML(s.name)}</strong></td>
+                <td><b>${escapeHTML(s.name)}</b><br><small>${escapeHTML(s.desc)}</small></td>
                 <td>${escapeHTML(s.host)}</td>
-                <td>${escapeHTML(s.desc)}</td>
                 <td>${escapeHTML(s.ip)}:${s.port}</td>
-                <td><a onclick="alert('Join server: ${escapeHTML(s.ip)}:${s.port}')"><strong>[ Join ]</strong></a></td>
+                <td><a href="#" onclick="alert('Joining ${escapeHTML(s.ip)}:${s.port}'); return false;"><b>[ Join ]</b></a></td>
             </tr>
         `).join('');
 
-        main.innerHTML = `
-            <h2>Games List</h2>
-            ${formHtml}
-            <table class="classic">
-                <tr><th>Name</th><th>Host</th><th>Description</th><th>IP:Port</th><th>Action</th></tr>
+        container.innerHTML = `
+            <h2>Server List (${db.servers.length} Games)</h2>
+            ${hostBox}
+            <table class="forum-table">
+                <tr><th>Server Name</th><th>Host</th><th>IP:Port</th><th>Action</th></tr>
                 ${rows}
             </table>
         `;
     } else if (currentView.page === 'cat') {
         const cat = db.categories.find(c => c.id === currentView.id);
-        const catTopics = db.topics.filter(t => t.catId === cat.id);
-
-        let formHtml = currentUser ? `
-            <fieldset>
-                <legend><strong>New Topic</strong></legend>
-                <form onsubmit="handleNewTopic(event, ${cat.id})">
-                    Title: <input type="text" id="topic-title" required><br><br>
-                    Body:<br><textarea id="topic-content" rows="4" cols="40" required></textarea><br><br>
-                    <input type="submit" value="Post">
-                </form>
-            </fieldset>
-        ` : `<p><a onclick="navigate('login')">Login</a> to post.</p>`;
-
-        let rows = catTopics.map(t => {
-            const author = db.users.find(u => u.id === t.userId) || { username: 'Unknown' };
+        const topics = db.topics.filter(t => t.catId === cat.id);
+        let rows = topics.map(t => {
+            const author = db.users.find(u => u.id === t.userId) || {username: 'Unknown'};
             const replies = db.posts.filter(p => p.topicId === t.id).length - 1;
-            return `
-                <tr>
-                    <td><a onclick="navigate('topic', ${t.id})">${escapeHTML(t.title)}</a></td>
-                    <td>${escapeHTML(author.username)}</td>
-                    <td>${Math.max(0, replies)}</td>
-                    <td>${escapeHTML(t.date)}</td>
-                </tr>
-            `;
+            return `<tr><td><a href="#" onclick="navigate('topic', ${t.id}); return false;">${escapeHTML(t.title)}</a></td><td>${escapeHTML(author.username)}</td><td>${Math.max(0, replies)}</td><td>${escapeHTML(t.date)}</td></tr>`;
         }).join('');
 
-        main.innerHTML = `
-            <p><a onclick="navigate('index')">Board index</a></p>
+        let newTopicBox = currentUser ? `
+            <fieldset><legend><b>New Topic</b></legend>
+            <form onsubmit="handleNewTopic(event, ${cat.id})">
+                Title: <input type="text" id="t-title" size="30" required><br><br>
+                Message:<br><textarea id="t-content" rows="3" cols="40" required></textarea><br><br>
+                <input type="submit" value="Submit">
+            </form></fieldset>
+        ` : `<p><a href="#" onclick="navigate('login'); return false;">Login</a> to post.</p>`;
+
+        container.innerHTML = `
+            <p><a href="#" onclick="navigate('index'); return false;">Board index</a></p>
             <h2>${escapeHTML(cat.title)}</h2>
-            ${formHtml}
-            <table class="classic">
+            ${newTopicBox}
+            <table class="forum-table">
                 <tr><th>Topic</th><th>Author</th><th>Replies</th><th>Date</th></tr>
-                ${rows || '<tr><td colspan="4">No topics.</td></tr>'}
+                ${rows || '<tr><td colspan="4">No topics found.</td></tr>'}
             </table>
         `;
     } else if (currentView.page === 'topic') {
@@ -377,50 +336,84 @@ function render() {
         const posts = db.posts.filter(p => p.topicId === topic.id);
 
         let rows = posts.map(p => {
-            const author = db.users.find(u => u.id === p.userId) || { username: 'Unknown', role: 'User' };
-            return `
-                <tr>
-                    <td style="width: 130px; vertical-align: top;"><strong>${escapeHTML(author.username)}</strong></td>
-                    <td style="vertical-align: top;">
-                        <small>${escapeHTML(p.date)}</small><hr>
-                        ${escapeHTML(p.content).replace(/\n/g, '<br>')}
-                    </td>
-                </tr>
-            `;
+            const author = db.users.find(u => u.id === p.userId) || {username: 'Unknown', role: 'Registered user'};
+            return `<tr>
+                <td style="width: 140px; vertical-align: top;"><b style="color:${getRoleColor(author.role)}">${escapeHTML(author.username)}</b><br><small>${escapeHTML(author.role)}</small></td>
+                <td style="vertical-align: top;"><small>Posted: ${escapeHTML(p.date)}</small><hr style="border:0; border-top:1px solid #ddd; margin:4px 0;">${escapeHTML(p.content).replace(/\n/g, '<br>')}</td>
+            </tr>`;
         }).join('');
 
-        let replyForm = currentUser ? `
+        let replyBox = currentUser ? `
             <form onsubmit="handleReply(event, ${topic.id})">
-                Reply:<br><textarea id="reply-content" rows="3" cols="40" required></textarea><br><br>
-                <input type="submit" value="Submit">
+                <b>Reply:</b><br><textarea id="r-content" rows="3" cols="40" required></textarea><br><br>
+                <input type="submit" value="Post Reply">
             </form>
-        ` : `<p><a onclick="navigate('login')">Login</a> to reply.</p>`;
+        ` : `<p><a href="#" onclick="navigate('login'); return false;">Login</a> to reply.</p>`;
 
-        main.innerHTML = `
-            <p><a onclick="navigate('index')">Index</a> &lsaquo; <a onclick="navigate('cat', ${cat.id})">${escapeHTML(cat.title)}</a></p>
+        container.innerHTML = `
+            <p><a href="#" onclick="navigate('index'); return false;">Board index</a> &lsaquo; <a href="#" onclick="navigate('cat', ${cat.id}); return false;">${escapeHTML(cat.title)}</a></p>
             <h2>${escapeHTML(topic.title)}</h2>
-            <table class="classic">${rows}</table>
-            ${replyForm}
+            <table class="forum-table">${rows}</table>
+            ${replyBox}
         `;
     } else {
-        let html = `<ul>`;
-        db.categories.forEach(cat => {
-            if (cat.isServerList) {
-                html += `<li><a onclick="navigate('servers')">${escapeHTML(cat.title)}</a> - ${escapeHTML(cat.desc)} (${db.servers.length} games)</li>`;
-            } else {
-                html += `<li><a onclick="navigate('cat', ${cat.id})">${escapeHTML(cat.title)}</a> - ${escapeHTML(cat.desc)}</li>`;
-            }
+        // BOARD INDEX - Ακριβώς όπως στις εικόνες σου
+        const sections = ['RESBLOX', 'ROBLOX', 'Other'];
+        let html = '';
+
+        sections.forEach(sec => {
+            html += `<table class="forum-table">
+                <tr>
+                    <th style="width: 55%;"><b>${sec}</b></th>
+                    <th style="width: 10%; text-align: center;">Topics</th>
+                    <th style="width: 10%; text-align: center;">Posts</th>
+                    <th style="width: 25%;">Last post</th>
+                </tr>`;
+
+            const cats = db.categories.filter(c => c.section === sec);
+            cats.forEach(cat => {
+                if (cat.isServer) {
+                    html += `<tr>
+                        <td colspan="4"><b><a href="#" onclick="navigate('servers'); return false;">Server List</a></b><br><span style="font-size: 11px;">${escapeHTML(cat.desc)} (${db.servers.length} games online)</span></td>
+                    </tr>`;
+                } else {
+                    const top = db.topics.filter(t => t.catId === cat.id);
+                    const topIds = top.map(t => t.id);
+                    const pst = db.posts.filter(p => topIds.includes(p.topicId));
+                    const last = pst[pst.length - 1];
+                    let lastHtml = '<i>No posts</i>';
+                    if (last) {
+                        const aut = db.users.find(u => u.id === last.userId) || {username: 'Unknown', role: 'Registered user'};
+                        lastHtml = `by <b style="color:${getRoleColor(aut.role)}">${escapeHTML(aut.username)}</b><br>${escapeHTML(last.date)}`;
+                    }
+
+                    html += `<tr>
+                        <td><b><a href="#" onclick="navigate('cat', ${cat.id}); return false;">${escapeHTML(cat.title)}</a></b><br><span style="font-size: 11px;">${escapeHTML(cat.desc)}</span></td>
+                        <td style="text-align: center;">${top.length}</td>
+                        <td style="text-align: center;">${pst.length}</td>
+                        <td style="font-size: 11px;">${lastHtml}</td>
+                    </tr>`;
+                }
+            });
+            html += `</table>`;
         });
-        html += `</ul>`;
-        main.innerHTML = html;
+        container.innerHTML = html;
     }
 
-    document.getElementById('who-is-online').innerHTML = `<p>Online users: 1</p>`;
-    document.getElementById('site-stats').innerHTML = `<p>Posts: ${db.posts.length} &bull; Topics: ${db.topics.length} &bull; Members: ${db.users.length} &bull; Games: ${db.servers.length}</p>`;
+    // Who is online & Stats ακριβώς όπως στη 2η εικόνα
+    document.getElementById('who-is-online').innerHTML = `
+        In total there is <b>1</b> user online :: 1 registered, 0 hidden and 0 guests (based on users active over the past 15 minutes)<br>
+        Most users ever online was <b>26</b> on Mon Jul 19, 2010 8:38 pm<br><br>
+        Registered users: <span style="color:#888;">Alexa [Bot]</span><br>
+        Legend: <span style="color:#AA0000">Administrators</span>, <span style="color:#551A8B">Official ROBLOX Staff</span>, <span style="color:#000000">Registered users</span>, <span style="color:#00AA00">Super Moderators</span>
+    `;
+
+    document.getElementById('site-stats').innerHTML = `
+        Total posts <b>${db.posts.length}</b> &bull; Total topics <b>${db.topics.length}</b> &bull; Total members <b>${db.users.length}</b> &bull; Our newest member <b>Dqbert</b>
+    `;
 }
 
 render();
 </script>
 </body>
 </html>
-
