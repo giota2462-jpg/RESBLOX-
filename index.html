@@ -1,1 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESBLOX</title>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #000000;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 14px;
+            margin: 15px;
+            line-height: 1.4;
+        }
+        a { color: #0000EE; text-decoration: underline; cursor: pointer; }
+        a:visited { color: #551A8B; }
+        .logo-box {
+            width: 160px;
+            height: 60px;
+            border: 1px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+        h1 { font-size: 24px; margin: 5px 0; }
+        h2 { font-size: 18px; margin: 10px 0; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
+        .announcement { text-align: center; margin: 15px 0; }
+        .important { color: #CC0000; font-weight: bold; }
+        .meta-indent { margin-left: 25px; font-size: 13px; margin-bottom: 8px; }
+        .italic { font-style: italic; }
+        table.classic { border-collapse: collapse; width: 100%; max-width: 900px; margin: 10px 0; }
+        table.classic th, table.classic td { border: 1px solid #888; padding: 6px 8px; text-align: left; }
+        table.classic th { background-color: #EFEFEF; }
+        input[type="text"], input[type="password"], textarea, select {
+            font-family: "Times New Roman", Times, serif;
+            border: 1px solid #777;
+            padding: 4px;
+            max-width: 95%;
+        }
+        input[type="submit"], button {
+            font-family: "Times New Roman", Times, serif;
+            padding: 3px 8px;
+            cursor: pointer;
+            background-color: #EFEFEF;
+            border: 1px solid #777;
+        }
+        .msg { color: #CC0000; font-weight: bold; margin: 10px 0; }
+        fieldset { max-width: 600px; margin-bottom: 15px; border: 1px solid #888; background: #fafafa; }
+        ul.nav-menu { list-style-type: none; padding: 0; margin: 10px 0; }
+        ul.nav-menu li { display: inline; margin-right: 15px; }
+        .footer-note { font-size: 12px; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="logo-box">RESBLOX</div>
+<h1>RESBLOX</h1>
+<p>The offsite ROBLOX game server platform.</p>
+
+<ul class="nav-menu" id="top-nav"></ul>
+
+<h3>Announcements</h3>
+<div class="announcement">
+    <p>Download launcher <a onclick="alert('Launcher download link')">here</a>.</p>
+</div>
+
+<div id="status-msg" class="msg"></div>
+
+<p id="last-visit"></p>
+<p id="current-time"></p>
+
+<hr>
+
+<div id="main-content"></div>
+
+<hr>
+
+<h3>Who is online</h3>
+<div id="who-is-online"></div>
+
+<h3>Statistics</h3>
+<div id="site-stats"></div>
+
+<ul class="nav-menu" style="margin-top: 15px;">
+    <li><a onclick="navigate('index')">Board index</a></li>
+    <li>All times are UTC</li>
+</ul>
+
+<div class="footer-note">
+    Powered by phpBB &bull; RESBLOX Platform
+</div>
+
+<script>
+const DB_KEY = 'resblox_db_clean_v1';
+
+function formatDate(d = new Date()) {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let hours = d.getUTCHours();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12 || 12;
+    const mins = String(d.getUTCMinutes()).padStart(2, '0');
+    return `${days[d.getUTCDay()]} ${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} ${hours}:${mins} ${ampm}`;
+}
+
+function getDefaultDB() {
+    return {
+        users: [
+            { id: 1, username: 'Admin', password: '123', role: 'Administrator' },
+            { id: 2, username: 'Player1', password: '123', role: 'Registered user' }
+        ],
+        categories: [
+            { id: 1, section: 'RESBLOX', title: 'News & Announcements', desc: 'Platform updates and news.', isServerList: false },
+            { id: 2, section: 'RESBLOX', title: 'General Discussion', desc: 'Talk about anything here.', isServerList: false },
+            { id: 3, section: 'RESBLOX', title: 'Games List (28)', desc: 'Active servers and games.', isServerList: true }
+        ],
+        topics: [
+            { id: 1, catId: 1, userId: 1, title: 'Welcome to RESBLOX', date: 'Mon Jan 1, 2026 12:00 pm' },
+            { id: 2, catId: 2, userId: 2, title: 'Hello everyone!', date: 'Mon Jan 1, 2026 12:05 pm' }
+        ],
+        posts: [
+            { id: 1, topicId: 1, userId: 1, content: 'Platform is online and ready.', date: 'Mon Jan 1, 2026 12:00 pm' },
+            { id: 2, topicId: 2, userId: 2, content: 'Glad to be here!', date: 'Mon Jan 1, 2026 12:05 pm' }
+        ],
+        servers: [
+            { id: 1, host: 'Admin', name: 'Crossroads Map', desc: 'Classic combat map', ip: '127.0.0.1', port: 53640 },
+            { id: 2, host: 'Player1', name: 'SFOTH IV', desc: 'Sword fighting', ip: '127.0.0.1', port: 53641 },
+            { id: 3, host: 'Host3', name: 'Doomspire', desc: 'Tower destruction', ip: '127.0.0.1', port: 53642 },
+            { id: 4, host: 'Host4', name: 'Town of Robloxia', desc: 'Roleplay town', ip: '127.0.0.1', port: 53643 },
+            { id: 5, host: 'Host5', name: 'Natural Disaster', desc: 'Survive events', ip: '127.0.0.1', port: 53644 },
+            { id: 6, host: 'Host6', name: 'Base Wars', desc: 'Tank battles', ip: '127.0.0.1', port: 53645 },
+            { id: 7, host: 'Host7', name: 'Pizza Place', desc: 'Work and cook', ip: '127.0.0.1', port: 53646 },
+            { id: 8, host: 'Host8', name: 'Crossroads v1', desc: 'Old version', ip: '127.0.0.1', port: 53647 },
+            { id: 9, host: 'Host9', name: 'Minigames', desc: 'Fast fun', ip: '127.0.0.1', port: 53648 },
+            { id: 10, host: 'Host10', name: 'Paintball Arena', desc: 'Paint guns', ip: '127.0.0.1', port: 53649 },
+            { id: 11, host: 'Host11', name: 'Teleport Test', desc: 'Testing map', ip: '127.0.0.1', port: 53650 },
+            { id: 12, host: 'Host12', name: 'Castle Defense', desc: 'Defend base', ip: '127.0.0.1', port: 53651 },
+            { id: 13, host: 'Host13', name: 'Vehicle Sim', desc: 'Driving cars', ip: '127.0.0.1', port: 53652 },
+            { id: 14, host: 'Host14', name: 'Mega Obby', desc: 'Obstacle course', ip: '127.0.0.1', port: 53653 },
+            { id: 15, host: 'Host15', name: 'Forest Hideout', desc: 'Hidden weapons', ip: '127.0.0.1', port: 53654 },
+            { id: 16, host: 'Host16', name: 'Rocket Arena', desc: 'Rockets only', ip: '127.0.0.1', port: 53655 },
+            { id: 17, host: 'Host17', name: 'Zombie Survival', desc: 'Fight zombies', ip: '127.0.0.1', port: 53656 },
+            { id: 18, host: 'Host18', name: 'Hide and Seek', desc: 'Find players', ip: '127.0.0.1', port: 53657 },
+            { id: 19, host: 'Host19', name: 'Derby Crash', desc: 'Car crashes', ip: '127.0.0.1', port: 53658 },
+            { id: 20, host: 'Host20', name: 'Bomb Survival', desc: 'Dodge bombs', ip: '127.0.0.1', port: 53659 },
+            { id: 21, host: 'Host21', name: 'City Roleplay', desc: 'Virtual life', ip: '127.0.0.1', port: 53660 },
+            { id: 22, host: 'Host22', name: 'Ninja Dojo', desc: 'Katana training', ip: '127.0.0.1', port: 53661 },
+            { id: 23, host: 'Host23', name: 'Pirate Battle', desc: 'Seas combat', ip: '127.0.0.1', port: 53662 },
+            { id: 24, host: 'Host24', name: 'Moon Base', desc: 'Space exploration', ip: '127.0.0.1', port: 53663 },
+            { id: 25, host: 'Host25', name: 'Sword Arena', desc: 'Fast duels', ip: '127.0.0.1', port: 53664 },
+            { id: 26, host: 'Host26', name: 'Speedway Racing', desc: 'High speed cars', ip: '127.0.0.1', port: 53665 },
+            { id: 27, host: 'Host27', name: 'Sandbox Build', desc: 'Build freely', ip: '127.0.0.1', port: 53666 },
+            { id: 28, host: 'Host28', name: 'Final Server', desc: 'Last slot game', ip: '127.0.0.1', port: 53667 }
+        ]
+    };
+}
+
+let db = JSON.parse(localStorage.getItem(DB_KEY)) || getDefaultDB();
+let currentUser = JSON.parse(sessionStorage.getItem('res_user')) || null;
+let currentView = { page: 'index', id: null };
+
+function saveDB() {
+    localStorage.setItem(DB_KEY, JSON.stringify(db));
+}
+
+function escapeHTML(str) {
+    return String(str).replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+    }[tag]));
+}
+
+function setMsg(text) {
+    document.getElementById('status-msg').textContent = text;
+}
+
+function navigate(page, id = null) {
+    setMsg('');
+    currentView = { page, id };
+    render();
+    window.scrollTo(0, 0);
+}
+
+function handleLogin(e) {
+    e.preventDefault();
+    const u = document.getElementById('login-user').value.trim();
+    const p = document.getElementById('login-pass').value;
+    const found = db.users.find(x => x.username.toLowerCase() === u.toLowerCase() && x.password === p);
+    if (found) {
+        currentUser = found;
+        sessionStorage.setItem('res_user', JSON.stringify(found));
+        navigate('index');
+    } else {
+        setMsg('Invalid login!');
+    }
+}
+
+function handleRegister(e) {
+    e.preventDefault();
+    const u = document.getElementById('reg-user').value.trim();
+    const p = document.getElementById('reg-pass').value;
+    if (u.length < 3 || p.length < 3) {
+        setMsg('Min 3 characters required.');
+        return;
+    }
+    if (db.users.some(x => x.username.toLowerCase() === u.toLowerCase())) {
+        setMsg('User exists!');
+        return;
+    }
+    const newUser = { id: Date.now(), username: u, password: p, role: 'Registered user' };
+    db.users.push(newUser);
+    saveDB();
+    currentUser = newUser;
+    sessionStorage.setItem('res_user', JSON.stringify(newUser));
+    navigate('index');
+}
+
+function logout() {
+    currentUser = null;
+    sessionStorage.removeItem('res_user');
+    navigate('index');
+}
+
+function handleNewTopic(e, catId) {
+    e.preventDefault();
+    if (!currentUser) return;
+    const title = document.getElementById('topic-title').value.trim();
+    const content = document.getElementById('topic-content').value.trim();
+    if (!title || !content) return;
+    const now = formatDate();
+    const tid = Date.now();
+    db.topics.unshift({ id: tid, catId: catId, userId: currentUser.id, title: title, date: now });
+    db.posts.push({ id: Date.now() + 1, topicId: tid, userId: currentUser.id, content: content, date: now });
+    saveDB();
+    navigate('topic', tid);
+}
+
+function handleReply(e, topicId) {
+    e.preventDefault();
+    if (!currentUser) return;
+    const content = document.getElementById('reply-content').value.trim();
+    if (!content) return;
+    db.posts.push({ id: Date.now(), topicId: topicId, userId: currentUser.id, content: content, date: formatDate() });
+    saveDB();
+    navigate('topic', topicId);
+}
+
+function handleAddServer(e) {
+    e.preventDefault();
+    if (!currentUser) return;
+    const name = document.getElementById('srv-name').value.trim();
+    const desc = document.getElementById('srv-desc').value.trim();
+    const ip = document.getElementById('srv-ip').value.trim();
+    const port = parseInt(document.getElementById('srv-port').value) || 53640;
+    if (!name || !ip) return;
+    db.servers.unshift({ id: Date.now(), host: currentUser.username, name, desc, ip, port });
+    saveDB();
+    navigate('servers');
+}
+
+function render() {
+    const nowStr = formatDate();
+    document.getElementById('last-visit').textContent = 'Last visit: ' + nowStr;
+    document.getElementById('current-time').textContent = 'Current time: ' + nowStr;
+
+    const nav = document.getElementById('top-nav');
+    nav.innerHTML = `
+        <li><a onclick="navigate('index')"><strong>[ Board Index ]</strong></a></li>
+        <li><a onclick="navigate('servers')"><strong>[ Games (${db.servers.length}) ]</strong></a></li>
+        <li><a onclick="navigate('faq')"><strong>[ FAQ ]</strong></a></li>
+        ${currentUser
+            ? `<li>Logged in as <strong>${escapeHTML(currentUser.username)}</strong> [ <a onclick="logout()">Logout</a> ]</li>`
+            : `<li><a onclick="navigate('login')"><strong>[ Login / Register ]</strong></a></li>`
+        }
+    `;
+
+    const main = document.getElementById('main-content');
+
+    if (currentView.page === 'login') {
+        main.innerHTML = `
+            <h2>Login</h2>
+            <form onsubmit="handleLogin(event)">
+                User: <input type="text" id="login-user" required><br><br>
+                Pass: <input type="password" id="login-pass" required><br><br>
+                <input type="submit" value="Login">
+            </form>
+            <hr>
+            <h2>Register</h2>
+            <form onsubmit="handleRegister(event)">
+                User: <input type="text" id="reg-user" required><br><br>
+                Pass: <input type="password" id="reg-pass" required><br><br>
+                <input type="submit" value="Register">
+            </form>
+        `;
+    } else if (currentView.page === 'faq') {
+        main.innerHTML = `
+            <h2>FAQ</h2>
+            <p>Use the Games button to view all servers and join.</p>
+        `;
+    } else if (currentView.page === 'servers') {
+        let formHtml = currentUser ? `
+            <fieldset>
+                <legend><strong>Host Game</strong></legend>
+                <form onsubmit="handleAddServer(event)">
+                    Name: <input type="text" id="srv-name" required><br><br>
+                    Desc: <input type="text" id="srv-desc"><br><br>
+                    IP: <input type="text" id="srv-ip" value="127.0.0.1" required>
+                    Port: <input type="text" id="srv-port" value="53640" size="6" required><br><br>
+                    <input type="submit" value="Add Server">
+                </form>
+            </fieldset>
+        ` : `<p><a onclick="navigate('login')">Login</a> to host.</p>`;
+
+        let rows = db.servers.map((s, i) => `
+            <tr>
+                <td><strong>#${i + 1} - ${escapeHTML(s.name)}</strong></td>
+                <td>${escapeHTML(s.host)}</td>
+                <td>${escapeHTML(s.desc)}</td>
+                <td>${escapeHTML(s.ip)}:${s.port}</td>
+                <td><a onclick="alert('Join server: ${escapeHTML(s.ip)}:${s.port}')"><strong>[ Join ]</strong></a></td>
+            </tr>
+        `).join('');
+
+        main.innerHTML = `
+            <h2>Games List</h2>
+            ${formHtml}
+            <table class="classic">
+                <tr><th>Name</th><th>Host</th><th>Description</th><th>IP:Port</th><th>Action</th></tr>
+                ${rows}
+            </table>
+        `;
+    } else if (currentView.page === 'cat') {
+        const cat = db.categories.find(c => c.id === currentView.id);
+        const catTopics = db.topics.filter(t => t.catId === cat.id);
+
+        let formHtml = currentUser ? `
+            <fieldset>
+                <legend><strong>New Topic</strong></legend>
+                <form onsubmit="handleNewTopic(event, ${cat.id})">
+                    Title: <input type="text" id="topic-title" required><br><br>
+                    Body:<br><textarea id="topic-content" rows="4" cols="40" required></textarea><br><br>
+                    <input type="submit" value="Post">
+                </form>
+            </fieldset>
+        ` : `<p><a onclick="navigate('login')">Login</a> to post.</p>`;
+
+        let rows = catTopics.map(t => {
+            const author = db.users.find(u => u.id === t.userId) || { username: 'Unknown' };
+            const replies = db.posts.filter(p => p.topicId === t.id).length - 1;
+            return `
+                <tr>
+                    <td><a onclick="navigate('topic', ${t.id})">${escapeHTML(t.title)}</a></td>
+                    <td>${escapeHTML(author.username)}</td>
+                    <td>${Math.max(0, replies)}</td>
+                    <td>${escapeHTML(t.date)}</td>
+                </tr>
+            `;
+        }).join('');
+
+        main.innerHTML = `
+            <p><a onclick="navigate('index')">Board index</a></p>
+            <h2>${escapeHTML(cat.title)}</h2>
+            ${formHtml}
+            <table class="classic">
+                <tr><th>Topic</th><th>Author</th><th>Replies</th><th>Date</th></tr>
+                ${rows || '<tr><td colspan="4">No topics.</td></tr>'}
+            </table>
+        `;
+    } else if (currentView.page === 'topic') {
+        const topic = db.topics.find(t => t.id === currentView.id);
+        const cat = db.categories.find(c => c.id === topic.catId);
+        const posts = db.posts.filter(p => p.topicId === topic.id);
+
+        let rows = posts.map(p => {
+            const author = db.users.find(u => u.id === p.userId) || { username: 'Unknown', role: 'User' };
+            return `
+                <tr>
+                    <td style="width: 130px; vertical-align: top;"><strong>${escapeHTML(author.username)}</strong></td>
+                    <td style="vertical-align: top;">
+                        <small>${escapeHTML(p.date)}</small><hr>
+                        ${escapeHTML(p.content).replace(/\n/g, '<br>')}
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        let replyForm = currentUser ? `
+            <form onsubmit="handleReply(event, ${topic.id})">
+                Reply:<br><textarea id="reply-content" rows="3" cols="40" required></textarea><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        ` : `<p><a onclick="navigate('login')">Login</a> to reply.</p>`;
+
+        main.innerHTML = `
+            <p><a onclick="navigate('index')">Index</a> &lsaquo; <a onclick="navigate('cat', ${cat.id})">${escapeHTML(cat.title)}</a></p>
+            <h2>${escapeHTML(topic.title)}</h2>
+            <table class="classic">${rows}</table>
+            ${replyForm}
+        `;
+    } else {
+        let html = `<ul>`;
+        db.categories.forEach(cat => {
+            if (cat.isServerList) {
+                html += `<li><a onclick="navigate('servers')">${escapeHTML(cat.title)}</a> - ${escapeHTML(cat.desc)} (${db.servers.length} games)</li>`;
+            } else {
+                html += `<li><a onclick="navigate('cat', ${cat.id})">${escapeHTML(cat.title)}</a> - ${escapeHTML(cat.desc)}</li>`;
+            }
+        });
+        html += `</ul>`;
+        main.innerHTML = html;
+    }
+
+    document.getElementById('who-is-online').innerHTML = `<p>Online users: 1</p>`;
+    document.getElementById('site-stats').innerHTML = `<p>Posts: ${db.posts.length} &bull; Topics: ${db.topics.length} &bull; Members: ${db.users.length} &bull; Games: ${db.servers.length}</p>`;
+}
+
+render();
+</script>
+</body>
+</html>
 
