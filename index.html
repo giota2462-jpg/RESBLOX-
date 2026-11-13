@@ -21,7 +21,6 @@
         .important { color: #CC0000; font-weight: bold; }
         .msg { color: #CC0000; font-weight: bold; margin: 5px 0; }
         
-        /* Κουμπί Download Android στυλ εποχής */
         .download-btn {
             display: inline-block;
             background-color: #EFEFEF;
@@ -63,6 +62,7 @@
         }
         input[type="submit"] { background-color: #EFEFEF; border: 1px solid #666; cursor: pointer; }
         fieldset { border: 1px solid #C0C0C0; padding: 10px; max-width: 600px; margin-bottom: 10px; }
+        .help-box { border: 1px solid #C0C0C0; background: #F9F9F9; padding: 12px; max-width: 750px; }
     </style>
 </head>
 <body>
@@ -81,13 +81,12 @@
 <div class="announcement">
     <p>You can download the PC launcher <a href="https://www.mediafire.com/file/81j21o01qqeag60/RESBLOX.tar/file" target="_blank">here</a>.</p>
     
-    <!-- ΕΔΩ ΕΙΝΑΙ ΤΟ ΝΕΟ ΚΟΥΜΠΙ ΓΙΑ ΤΟ ANDROID APK -->
     <p style="margin-top: 10px;">
         <a href="https://www.mediafire.com/file/cqdvbpk8pk8uwi8/ROBLOXOffline.apk/file" target="_blank" class="download-btn">&#9658; Download for Android (APK)</a>
     </p>
 
     <p><span class="important">Important Information!</span><br>
-    To play offline maps on Android, put your `.rbxl` files inside the <b>ROBLOX/places</b> folder on your phone storage.</p>
+    To play offline maps on Android, put your <code>.rbxl</code> files inside the <b>ROBLOX/places</b> folder on your phone storage. Click <b>[ Help ]</b> at the bottom for full instructions.</p>
 </div>
 
 <div id="status-msg" class="msg"></div>
@@ -108,7 +107,8 @@
 <div id="site-stats"></div>
 
 <p style="margin: 10px 0;">
-    <a href="#" onclick="navigate('index'); return false;">Board index</a><br>
+    <a href="#" onclick="navigate('index'); return false;">Board index</a> &bull; 
+    <a href="#" onclick="navigate('help'); return false;"><b>[ Help ]</b></a><br>
     All times are UTC
 </p>
 
@@ -285,7 +285,40 @@ function render() {
             </form></fieldset>`}
         `;
     } else if (currentView.page === 'faq') {
-        container.innerHTML = `<h2>FAQ</h2><p>RESBLOX is an offsite platform. Check the Server List to join games.</p>`;
+        container.innerHTML = `<h2>FAQ</h2><p>RESBLOX is an offsite platform. Check the Server List to join games, or click <b>[ Help ]</b> at the bottom for Android setup instructions.</p>`;
+    } else if (currentView.page === 'help') {
+        container.innerHTML = `
+            <p><a href="#" onclick="navigate('index'); return false;">&laquo; Back to Board index</a></p>
+            <h2>RESBLOX Android Setup &amp; Help Guide</h2>
+            <div class="help-box">
+                <h3>1. How to Download and Install the Client</h3>
+                <ol>
+                    <li>Go to the main page and click the <b>Download for Android (APK)</b> button under Site Announcements.</li>
+                    <li>Download <code>ROBLOXOffline.apk</code> from MediaFire.</li>
+                    <li>Open the downloaded APK file on your Android device and tap <b>Install</b> (enable <i>"Install from Unknown Sources"</i> in your phone settings if prompted).</li>
+                </ol>
+
+                <h3>2. How to Add Maps (.rbxl files)</h3>
+                <ol>
+                    <li>Open your phone's File Manager and go to your main <b>Internal Storage</b> (root directory).</li>
+                    <li>Create a new folder named <code>ROBLOX</code> (all capital letters).</li>
+                    <li>Open the <code>ROBLOX</code> folder and create another folder inside it named <code>places</code> (all lowercase).</li>
+                    <li>The final folder path should look like this: <code>Internal Storage/ROBLOX/places/</code></li>
+                    <li>Move or copy any classic <code>.rbxl</code> map files into that <code>places</code> folder.</li>
+                </ol>
+
+                <h3>3. How to Play</h3>
+                <ol>
+                    <li>Launch the installed <b>ROBLOX</b> app on your Android phone.</li>
+                    <li>Tap <b>Play Now</b> on the main screen.</li>
+                    <li>The client will automatically detect and load the <code>.rbxl</code> maps you placed inside <code>ROBLOX/places</code>!</li>
+                </ol>
+
+                <p style="margin-top: 15px; border-top: 1px solid #ccc; padding-top: 8px;">
+                    <b>Need PC Launcher instead?</b> You can download <code>RESBLOX.tar</code> from the link in the Site Announcements on the <a href="#" onclick="navigate('index'); return false;">Board index</a>.
+                </p>
+            </div>
+        `;
     } else if (currentView.page === 'servers') {
         let hostBox = currentUser ? `
             <fieldset><legend><b>Host a Server</b></legend>
