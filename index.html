@@ -21,7 +21,6 @@
         .important { color: #CC0000; font-weight: bold; }
         .msg { color: #CC0000; font-weight: bold; margin: 5px 0; }
         
-        /* phpBB 2010 Table / Category Layout */
         table.forum-table {
             width: 100%;
             max-width: 900px;
@@ -41,14 +40,6 @@
             padding: 5px 8px;
             vertical-align: middle;
         }
-        .cat-title-row {
-            background-color: #D9D9D9;
-            font-weight: bold;
-            padding: 4px 6px;
-            border: 1px solid #C0C0C0;
-            margin-top: 10px;
-        }
-        
         input, textarea, select {
             font-family: "Times New Roman", Times, serif;
             font-size: 13px;
@@ -73,9 +64,10 @@
 
 <h3>Site Announcements</h3>
 <div class="announcement">
-    <p>You can download RESL <a href="#" onclick="alert('RESL download link'); return false;">here</a>. The old information page can also be found <a href="#" onclick="navigate('faq'); return false;">here</a>.</p>
+    <!-- ΕΔΩ ΜΠΗΚΕ ΤΟ MEDIAFIRE LINK ΓΙΑ ΤΟ DOWNLOAD -->
+    <p>You can download RESL <a href="https://www.mediafire.com/file/81j21o01qqeag60/RESBLOX.tar/file" target="_blank">here</a>. The old information page can also be found <a href="#" onclick="navigate('faq'); return false;">here</a>.</p>
     <p><span class="important">Important Information!</span><br>
-    If you haven't uninstalled RESL and reinstalled it from <a href="#" onclick="alert('release'); return false;">release</a>, then you need to do so now, as the old version will no longer be able to interface with the new website for updates.</p>
+    If you haven't uninstalled RESL and reinstalled it from <a href="https://www.mediafire.com/file/81j21o01qqeag60/RESBLOX.tar/file" target="_blank">release</a>, then you need to do so now, as the old version will no longer be able to interface with the new website for updates.</p>
 </div>
 
 <div id="status-msg" class="msg"></div>
@@ -106,7 +98,7 @@
 </div>
 
 <script>
-const DB_KEY = 'resblox_exact_2010_db';
+const DB_KEY = 'resblox_exact_2010_db_v2';
 
 function getExactDateStr() {
     return "Sat Oct 30, 2010 2:20 am";
@@ -140,14 +132,13 @@ function getDefaultDB() {
             { id: 6, catId: 7, userId: 2, title: 'Random chat thread', date: 'Wed Oct 20, 2010 10:57 pm' }
         ],
         posts: [
-            { id: 1, topicId: 1, userId: 2, content: 'Make sure to reinstall RESL from release!', date: 'Tue Oct 26, 2010 8:28 pm' },
+            { id: 1, topicId: 1, userId: 2, content: 'Make sure to download RESL from MediaFire!', date: 'Tue Oct 26, 2010 8:28 pm' },
             { id: 2, topicId: 2, userId: 3, content: 'Servers are super smooth!', date: 'Fri Oct 29, 2010 8:36 pm' },
             { id: 3, topicId: 3, userId: 4, content: 'Would be cool to have classic hats.', date: 'Sat Sep 25, 2010 3:33 pm' },
             { id: 4, topicId: 4, userId: 1, content: 'Open port 53640.', date: 'Fri Oct 29, 2010 2:52 pm' },
             { id: 5, topicId: 5, userId: 5, content: 'SFOTH IV is the best.', date: 'Fri Aug 13, 2010 5:36 pm' },
             { id: 6, topicId: 6, userId: 2, content: 'Off topic chat here.', date: 'Wed Oct 20, 2010 10:57 pm' }
         ],
-        // Ακριβώς 28 παιχνίδια όπως ζήτησες
         servers: [
             { id: 1, host: 'RESBLOX', name: 'Crossroads [Classic 2010]', desc: 'The legendary original map!', ip: '127.0.0.1', port: 53640 },
             { id: 2, host: 'Nazer1290', name: 'Sword Fight on the Heights IV', desc: 'Classic sword fighting.', ip: '127.0.0.1', port: 53641 },
@@ -357,7 +348,6 @@ function render() {
             ${replyBox}
         `;
     } else {
-        // BOARD INDEX - Ακριβώς όπως στις εικόνες σου
         const sections = ['RESBLOX', 'ROBLOX', 'Other'];
         let html = '';
 
@@ -400,7 +390,6 @@ function render() {
         container.innerHTML = html;
     }
 
-    // Who is online & Stats ακριβώς όπως στη 2η εικόνα
     document.getElementById('who-is-online').innerHTML = `
         In total there is <b>1</b> user online :: 1 registered, 0 hidden and 0 guests (based on users active over the past 15 minutes)<br>
         Most users ever online was <b>26</b> on Mon Jul 19, 2010 8:38 pm<br><br>
